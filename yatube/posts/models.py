@@ -46,14 +46,13 @@ class Group(models.Model):
     title = models.CharField(
         max_length=200,
         verbose_name='Название группы',
-        help_text='Максимальная длина названия 200 символов.'
+        help_text='Максимальная длина названия 200 символов.',
     )
-    slug = models.CharField(
-        max_length=20,
+    slug = models.SlugField(
         verbose_name='Адрес группы',
         help_text='Уникальный адрес группы, часть URL (например, для группы '
-                  'любителей котиков slug будет равен cats: group/cats). '
-                  'Максимальная длина адреса 20 символов.'
+                  'любителей котиков slug будет равен cats: group/cats).',
+        unique=True,
     )
     description = models.TextField(
         verbose_name='Описание',

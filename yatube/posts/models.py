@@ -20,14 +20,14 @@ class Post(models.Model):
         User,
         verbose_name='Автор',
         on_delete=models.CASCADE,
-        related_name='posts',
+        related_name='author_posts',
     )
     group = models.ForeignKey(
         'Group',
         verbose_name='Группа записей',
         help_text='Привязка к конкретной группе записей',
-        on_delete=models.CASCADE,
-        related_name='groups',
+        on_delete=models.SET_NULL,
+        related_name='group_posts',
         blank=True,
         null=True,
     )
@@ -35,6 +35,7 @@ class Post(models.Model):
     class Meta:
         verbose_name = 'Запись'
         verbose_name_plural = 'Записи'
+        ordering = ['-pub_date']
 
     def __str__(self):
         return 'Запись #{pk} от {date}'.format(pk=self.pk, date=self.pub_date)
